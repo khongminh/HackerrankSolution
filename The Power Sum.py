@@ -1,5 +1,4 @@
-import sys
-import math
+from sys import stderr
 
 def powerSum(X, N):
     powerSum.number = 0
@@ -23,10 +22,18 @@ def powerSum(X, N):
     return powerSum.number
 
 
+def count_expressions(x, n, s, v):
+    if s == x:
+        return 1
+    else:
+        answer = 0
+        v += 1
+        while s + v ** n <= x:
+            answer += count_expressions(x, n, s+v**n , v)
+            v += 1
+
+        return answer
 
 
-if __name__ == "__main__":
-    X = int(input().strip())
-    N = int(input().strip())
-    result = powerSum(X, N)
-    print(result)
+print(powerSum(100,3))
+print(count_expressions(100,3,0,0))
